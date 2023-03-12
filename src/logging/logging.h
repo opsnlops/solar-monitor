@@ -1,8 +1,8 @@
 
 #pragma once
 
-#include <cstring>
-#include <cstdio>
+#include <string.h>
+#include <stdio.h>
 
 #include "controller-config.h"
 
@@ -38,7 +38,7 @@ void error(const char *message, ...);
 
 void __unused fatal(const char *message, ...);
 
-LogMessage createMessageObject(uint8_t level, const char *message, va_list args);
+struct LogMessage createMessageObject(uint8_t level, const char *message, va_list args);
 
 
 void start_log_reader();

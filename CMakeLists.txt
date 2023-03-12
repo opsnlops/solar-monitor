@@ -25,6 +25,9 @@ file(GLOB sourceFiles
         src/*
         src/network/*
         src/logging/*
+        /Users/april/pico/pico-sdk/lib/lwip/src/apps/*
+        /Users/april/pico/pico-sdk/lib/lwip/src/apps/mdns/*
+        /Users/april/pico/pico-sdk/lib/lwip/src/apps/mqtt/*
         )
 
 add_executable(solar-monitor
