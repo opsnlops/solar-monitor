@@ -1,0 +1,4 @@
+.idea/
+src/secrets.h
+cmake-*/
+build/
