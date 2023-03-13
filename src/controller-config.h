@@ -9,4 +9,4 @@
 
 
 
-#define LOGGING_LEVEL 0
+#define LOGGING_LEVEL 5

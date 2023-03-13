@@ -1,10 +1,10 @@
 
 #pragma once
 
-#include <string.h>
-#include <stdio.h>
-
 #include "controller-config.h"
+
+#include <cstring>
+#include <cstdio>
 
 #define LOG_LEVEL_VERBOSE 5
 #define LOG_LEVEL_DEBUG 4
@@ -12,10 +12,6 @@
 #define LOG_LEVEL_WARNING 2
 #define LOG_LEVEL_ERROR 1
 #define LOG_LEVEL_FATAL 0
-
-#ifndef LOGGING_LEVEL
-#error LOGGING_LEVEL is not defined, logging will effectively do nothing
-#endif
 
 
 struct LogMessage {
@@ -38,7 +34,9 @@ void error(const char *message, ...);
 
 void __unused fatal(const char *message, ...);
 
-struct LogMessage createMessageObject(uint8_t level, const char *message, va_list args);
+LogMessage createMessageObject(uint8_t level, const char *message, va_list args);
+
+bool _is_safe_to_log();
 
 
 void start_log_reader();

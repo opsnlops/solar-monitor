@@ -3,6 +3,8 @@
 #include <cstring>
 #include "lwip/apps/mqtt.h"
 
+#include "controller-config.h"
+
 #include "lwip/opt.h"
 #include "lwip/ip_addr.h"
 #include "lwip/netif.h"
@@ -106,7 +108,7 @@ static void mqtt_sub_request_cb(void *arg, err_t result) {
 static int inpub_id;
 
 static void mqtt_incoming_publish_cb(void *arg, const char *topic, u32_t tot_len) {
-    printf("Incoming publish at topic %s with total length %u\n", topic, (unsigned int) tot_len);
+    debug("Incoming publish at topic %s with total length %u", topic, (unsigned int) tot_len);
 
     /* Decode topic string into a user defined reference */
     if (strcmp(topic, "system/heartbeat") == 0) {
@@ -121,7 +123,7 @@ static void mqtt_incoming_publish_cb(void *arg, const char *topic, u32_t tot_len
 }
 
 static void mqtt_incoming_data_cb(void *arg, const u8_t *data, u16_t len, u8_t flags) {
-    printf("Incoming publish payload with length %d, flags %u, data: %s\n", len, (unsigned int) flags, data);
+    debug("Incoming publish payload with length %d, flags %u, data: %s", len, (unsigned int) flags, data);
 
 
     if (flags & MQTT_DATA_FLAG_LAST) {
@@ -132,7 +134,7 @@ static void mqtt_incoming_data_cb(void *arg, const u8_t *data, u16_t len, u8_t f
         if (inpub_id == 0) {
             /* Don't trust the publisher, check zero termination */
             //if (data[len - 1] == 0) {
-                printf("heartbeat data: %s\n", (const char *) data);
+                debug("heartbeat data: %s", (const char *) data);
                 heartbeat = atol(reinterpret_cast<const char *>(data));
             //}
         } else if (inpub_id == 1) {

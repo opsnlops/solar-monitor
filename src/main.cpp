@@ -36,7 +36,7 @@ volatile uint32_t heartbeat = 0;
 
     for(EVER) {
         vTaskDelay(pdMS_TO_TICKS(1000));
-        printf("squeak (%u)\n", heartbeat);
+        debug("squeak (%u)", heartbeat);
     }
 
 }
@@ -110,9 +110,12 @@ portTASK_FUNCTION(heartbeat_checker_task, pvParameters) {
 
         if(heartbeat == last_heartbeat)
         {
-            printf("hummmm we're not getting heatbeats anymore, byeeee!\n");
+            fatal("hummmm we're not getting heatbeats anymore, byeeee!");
             watchdog_enable(1, 1);
             while(1);
+        }
+        else {
+            debug("heartbeat shows we're online o/");
         }
 
         last_heartbeat = heartbeat;
